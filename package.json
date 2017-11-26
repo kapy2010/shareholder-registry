@@ -1,0 +1,20 @@
+{
+  "name": "shareholder-registry",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node start-client.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pg": "^6.4.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  }
+}
