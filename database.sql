@@ -1,3 +1,5 @@
+create database shareholder_db;
+
 \c shareholder_db;
 
 create table company (id serial primary key, name varchar(50) not null, valuation varchar(100), created_at varchar(25));
