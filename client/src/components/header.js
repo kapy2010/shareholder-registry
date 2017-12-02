@@ -46,6 +46,7 @@ const Header = ({displayProfilePhoto}) => {
         Owners Room
       </div>
       <div style={styles.notification}>
+
         <img src={Notification} height="50" width="50" style={{paddingRight: "20px"}} alt="notification"/>
         <img src={Menu} height="30" width="30" alt="menu"/>
       </div>
