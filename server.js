@@ -10,61 +10,67 @@ const app = express();
 app.set("port", process.env.PORT || 3001);
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
+  app.use(express.static("client/build"));
 }
 
 app.get("/company/:id", (req, res) => {
-    const results = [];
-    const id = req.params.id;
-    const query = client.query(`select * from company where id = ${id}`);
+  const results = [];
+  const id = req.params.id;
 
-    query.on('row', (row) => {
-        results.push(row);
-    });
-    query.on('end', () => {
-        return res.json(results[0]);
-    });
+  const query = client.query(`select * from company where id = ${id}`);
+
+  query.on('row', (row) => {
+    results.push(row);
+  });
+  query.on('end', () => {
+    return res.json(results[0]);
+  });
 });
 
 app.get("/investor/:id", (req, res) => {
-    const results = [];
-    const id = req.params.id;
-    const query = client.query(`select * from investor where id = ${id}`);
+  const results = [];
+  const id = req.params.id;
 
-    query.on('row', (row) => {
-        results.push(row);
-    });
-    query.on('end', () => {
-        return res.json(results[0]);
-    });
+  const query = client.query(`select * from investor where id = ${id}`);
+
+  query.on('row', (row) => {
+    results.push(row);
+  });
+  query.on('end', () => {
+    return res.json(results[0]);
+  });
 });
 
-app.get("/registry", (req, res) => {
-    const results = [];
-    const query = client.query('select * from registry');
+app.get("/registry/:id", (req, res) => {
+  const results = [];
+  const id = req.params.id;
 
-    query.on('row', (row) => {
-        results.push(row);
-    });
-    query.on('end', () => {
+  const query = client.query(`select r.id, i.name, r.ownership, r.number_of_shares, r.share_number, r.color from registry r left join investor i ON r.investor_id=i.id where company_id=${id}`);
 
-        return res.json(results);
-    });
+  query.on('row', (row) => {
+    results.push(row);
+  });
+  query.on('end', () => {
+
+    return res.json(results);
+  });
 });
 
-app.get("/portfolio", (req, res) => {
-    const results = [];
-    const query = client.query('select * from portfolio');
+app.get("/portfolio/:id", (req, res) => {
+  const results = [];
+  const id = req.params.id;
 
-    query.on('row', (row) => {
-        results.push(row);
-    });
-    query.on('end', () => {
+  const query = client.query(`select p.id, c.name, p.number_of_shares, p.diluted, p.original_investments, p.value_of_investments, p.ROI, p.color from portfolio p left join company c ON p.company_id=c.id where investor_id=${id}`);
 
-        return res.json(results);
-    });
+  query.on('row', (row) => {
+    results.push(row);
+  });
+  query.on('end', () => {
+
+    return res.json(results);
+  });
 });
 
 app.listen(app.get("port"), () => {
-    console.log(`Find the server at: http://localhost:${app.get("port")}/`);
+  console.log(`Find the server at: http://localhost:${app.get("port")}/`);
 });

@@ -4,6 +4,8 @@
 Icon?
 ._*
 
+.idea
+
 # Windows
 Thumbs.db
 ehthumbs.db
