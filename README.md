@@ -3,8 +3,8 @@
 ## Running locally
 
 ```
-git clone https://github.com/fullstackreact/food-lookup-demo.git
-cd food-lookup-demo
+git clone https://github.com/kapy2010/shareholder-registry.git
+cd shareholder-registry
 
 psql -f database.sql
 npm i
